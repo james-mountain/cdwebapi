@@ -24,6 +24,13 @@ public class CDEndpoint {
         return service.retrieveCDs();
     }
 
+    @Path("/json/{id}")
+    @GET
+    @Produces({ "application/json" })
+    public String getCD(@PathParam("id") Long id) {
+        return service.retrieveCD(id);
+    }
+
     @Path("/json")
     @POST
     @Produces({ "application/json" })
@@ -32,9 +39,23 @@ public class CDEndpoint {
     }
 
     @Path("/json/{id}")
+    @PUT
+    @Produces({ "application/json" })
+    public String updateCD(@PathParam("id") Long id, String cd) {
+        return service.updateCD(id, cd);
+    }
+
+    @Path("/json/{id}")
     @DELETE
     @Produces({ "application/json" })
     public String deleteCD(@PathParam("id") Long id) {
         return service.deleteCD(id);
+    }
+
+    @Path("/json")
+    @DELETE
+    @Produces({ "application/json" })
+    public String deleteAllCD() {
+        return service.deleteAllCDs();
     }
 }
