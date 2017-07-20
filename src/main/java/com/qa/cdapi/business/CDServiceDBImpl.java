@@ -25,7 +25,7 @@ public class CDServiceDBImpl implements CDService {
     private JSONUtil json;
 
     public String retrieveCDs() {
-        Query query = entityManager.createQuery("Select c FROM CD");
+        Query query = entityManager.createQuery("Select c FROM CD c");
         Collection<CD> cds = (Collection<CD>) query.getResultList();
         return json.getJSONForObject(cds);
     }
