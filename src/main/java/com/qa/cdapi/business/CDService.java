@@ -7,4 +7,7 @@ public interface CDService {
     String retrieveCDs();
     String createNewCD(String cdJSON);
     String deleteCD(long ID);
+    String retrieveCD(long ID);
+    String updateCD(long ID, String cdJSON);
+    String deleteAllCDs();
 }
