@@ -49,7 +49,7 @@ public class CDServiceDBImpl implements CDService {
 
     @Override
     public String retrieveCD(long ID) {
-        Query query = entityManager.createNativeQuery("Select c FROM CD c WHERE id=:ID");
+        Query query = entityManager.createQuery("Select c FROM CD c WHERE id=:ID");
         query.setParameter("ID", ID);
         Collection<CD> cds = (Collection<CD>) query.getResultList();
         return json.getJSONForObject(cds);
