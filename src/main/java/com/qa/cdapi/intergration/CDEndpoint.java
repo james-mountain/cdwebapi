@@ -33,7 +33,7 @@ public class CDEndpoint {
 
     @Path("/json/{id}")
     @DELETE
-    @Produces({ "application/json/" })
+    @Produces({ "application/json" })
     public String deleteCD(@PathParam("id") Long id) {
         return service.deleteCD(id);
     }
