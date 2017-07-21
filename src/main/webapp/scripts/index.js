@@ -36,19 +36,24 @@ function jsonToTable(cdObject) {
     document.getElementById("cdTable").style.display = "table";
 }
 
+function displayMessage(result) {
+    var messageBox = document.getElementById("messageHolder");
+    if(!result.error || result.error === "false") {
+        messageBox.className = "alert alert-success";
+    }
+    else {
+        messageBox.className = "alert alert-danger";
+    }
+    messageBox.innerHTML = result.message;
+    messageBox.style.display = "inline";
+}
+
 function deleteOneCD() {
     $.ajax({
         url: 'rest/cd/json/' + document.getElementById("idField").value,
         type: 'DELETE',
         success: function(result) {
-            if(result.error === "false") {
-                document.getElementsById("messageHolder").className = "alert alert-success";
-            }
-            else {
-                document.getElementsById("messageHolder").className = "alert alert-danger";
-            }
-            document.getElementById("messageHolder").innerHTML = result.message;
-            document.getElementById("messageHolder").style.display = "inline";
+            displayMessage(result);
         }
     });
 }
@@ -58,8 +63,9 @@ function deleteAllCDs() {
         url: 'rest/cd/json',
         type: 'DELETE',
         success: function(result) {
-            document.getElementById("messageHolder").innerHTML = result.message;
+            displayMessage(result);
         }
+
     });
 }
 
@@ -75,8 +81,7 @@ function createCD() {
         data: JSON.stringify(newCD),
         dataType: "json",
         success: function(result) {
-            document.getElementById("messageHolder").innerHTML = result.message;
-            document.getElementById("messageHolder").style.display = "inline";
+            displayMessage(result);
         }
     });
 }
@@ -94,8 +99,7 @@ function updateCD() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(result) {
-            document.getElementById("messageHolder").innerHTML = result.message;
-            document.getElementById("messageHolder").style.display = "inline";
+            displayMessage(result);
         }
     });
 }
@@ -130,8 +134,18 @@ function deleteCDStart() {
 }
 
 function deleteAllCDsStart() {
-    hideAllInputGroups();
+    hideAllIncTable();
     deleteAllCDs();
+}
+
+function hideAllIncTable() {
+    document.getElementById("idinputgroup").style.display = "none";
+    document.getElementById("artistinputgroup").style.display = "none";
+    document.getElementById("genreinputgroup").style.display = "none";
+    document.getElementById("titleinputgroup").style.display = "none";
+    document.getElementById("inputbutton").style.display = "none";
+    document.getElementById("messageHolder").style.display = "none";
+    document.getElementById("cdTable").style.display = "none";
 }
 
 function hideAllInputGroups() {
