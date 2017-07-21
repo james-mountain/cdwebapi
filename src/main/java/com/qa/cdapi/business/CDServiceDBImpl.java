@@ -35,7 +35,7 @@ public class CDServiceDBImpl implements CDService {
     public String createNewCD(String cdJSON) {
         CD newCD = json.getObjectForJSON(cdJSON, CD.class);
         entityManager.persist(newCD);
-        return "CD added";
+        return "{\"message\": \"CD was added\"}";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CDServiceDBImpl implements CDService {
         if (databaseCD != null) {
             entityManager.remove(databaseCD);
         }
-        return "CD removed";
+        return "{\"message\": \"CD was deleted\"}";
     }
 
     @Override
@@ -63,13 +63,13 @@ public class CDServiceDBImpl implements CDService {
             databaseCD = newCD;
             entityManager.merge(databaseCD);
         }
-        return "CD updated";
+        return "{\"message\": \"CD was updated\"}";
     }
 
     @Override
     public String deleteAllCDs() {
         Query query = entityManager.createQuery("DELETE FROM CD");
         query.executeUpdate();
-        return "All CDS deleted";
+        return "{\"message\": \"All CDs were deleted\"}";
     }
 }

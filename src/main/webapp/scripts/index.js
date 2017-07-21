@@ -23,7 +23,7 @@ function deleteOneCD() {
         url: 'rest/cd/json/' + document.getElementById("idField").value,
         type: 'DELETE',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = result;
+            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
         }
     });
 }
@@ -33,7 +33,7 @@ function deleteAllCDs() {
         url: 'rest/cd/json',
         type: 'DELETE',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = result;
+            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
         }
     });
 }
@@ -53,7 +53,6 @@ function createCD() {
             document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
         }
     });
-    //document.getElementById("outputHolder").innerHTML = "createCD()";
 }
 
 function updateCD() {
@@ -69,7 +68,7 @@ function updateCD() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = result;
+            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
         }
     });
 }
