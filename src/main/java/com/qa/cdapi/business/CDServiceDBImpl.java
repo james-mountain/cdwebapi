@@ -43,8 +43,9 @@ public class CDServiceDBImpl implements CDService {
         CD databaseCD = entityManager.find(CD.class, ID);
         if (databaseCD != null) {
             entityManager.remove(databaseCD);
+            return "{\"message\": \"CD was deleted\", \"error\": \"false\"}";
         }
-        return "{\"message\": \"CD was deleted\"}";
+        return "{\"message\": \"CD was not found\", \"error\": \"true\"}";
     }
 
     @Override
@@ -62,8 +63,9 @@ public class CDServiceDBImpl implements CDService {
         if (databaseCD != null) {
             databaseCD = newCD;
             entityManager.merge(databaseCD);
+            return "{\"message\": \"CD was updated\", \"error\": \"false\"}";
         }
-        return "{\"message\": \"CD was updated\"}";
+        return "{\"message\": \"CD was not found\", \"error\": \"true\"}";
     }
 
     @Override
