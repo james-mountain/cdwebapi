@@ -3,7 +3,7 @@ function getAllCDs() {
         url: "rest/cd/json",
         type: 'GET',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            jsonToTable(result);
         }
     });
 }
@@ -13,9 +13,27 @@ function getOneCD() {
         url: ("rest/cd/json/" + document.getElementById("idField").value),
         type: 'GET',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            jsonToTable(result);
         }
     });
+}
+
+function jsonToTable(cdObject) {
+    var tableBody = document.getElementById("cdHolder");
+
+    while(tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
+
+    for(var i = 0; i < cdObject.length; i++) {
+        var tableRow = document.createElement("tr");
+        tableRow.innerHTML += "<td>" + cdObject[i].id + "</td>";
+        tableRow.innerHTML += "<td>" + cdObject[i].artistname + "</td>";
+        tableRow.innerHTML += "<td>" + cdObject[i].genre + "</td>";
+        tableRow.innerHTML += "<td>" + cdObject[i].title + "</td>";
+        tableBody.appendChild(tableRow)
+    }
+    document.getElementById("cdTable").style.display = "table";
 }
 
 function deleteOneCD() {
@@ -23,7 +41,14 @@ function deleteOneCD() {
         url: 'rest/cd/json/' + document.getElementById("idField").value,
         type: 'DELETE',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            if(result.error === "false") {
+                document.getElementsById("messageHolder").className = "alert alert-success";
+            }
+            else {
+                document.getElementsById("messageHolder").className = "alert alert-danger";
+            }
+            document.getElementById("messageHolder").innerHTML = result.message;
+            document.getElementById("messageHolder").style.display = "inline";
         }
     });
 }
@@ -33,7 +58,7 @@ function deleteAllCDs() {
         url: 'rest/cd/json',
         type: 'DELETE',
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            document.getElementById("messageHolder").innerHTML = result.message;
         }
     });
 }
@@ -46,11 +71,12 @@ function createCD() {
 
     $.ajax({
         type: 'POST',
-        url: ("rest/cd/json/" + document.getElementById("idField").value),
+        url: "rest/cd/json",
         data: JSON.stringify(newCD),
         dataType: "json",
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            document.getElementById("messageHolder").innerHTML = result.message;
+            document.getElementById("messageHolder").style.display = "inline";
         }
     });
 }
@@ -68,7 +94,8 @@ function updateCD() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(result) {
-            document.getElementById("outputHolder").innerHTML = JSON.stringify(result);
+            document.getElementById("messageHolder").innerHTML = result.message;
+            document.getElementById("messageHolder").style.display = "inline";
         }
     });
 }
@@ -113,6 +140,8 @@ function hideAllInputGroups() {
     document.getElementById("genreinputgroup").style.display = "none";
     document.getElementById("titleinputgroup").style.display = "none";
     document.getElementById("inputbutton").style.display = "none";
+    document.getElementById("messageHolder").style.display = "none";
+    document.getElementById("cdTable").style.display = "table";
 }
 
 function showIDInputGroup() {
@@ -121,6 +150,8 @@ function showIDInputGroup() {
     document.getElementById("genreinputgroup").style.display = "none";
     document.getElementById("titleinputgroup").style.display = "none";
     document.getElementById("inputbutton").style.display = "inline";
+    document.getElementById("messageHolder").style.display = "none";
+    document.getElementById("cdTable").style.display = "none";
 }
 
 function showCreationGroups() {
@@ -129,6 +160,8 @@ function showCreationGroups() {
     document.getElementById("genreinputgroup").style.display = "inline-table";
     document.getElementById("titleinputgroup").style.display = "inline-table";
     document.getElementById("inputbutton").style.display = "inline";
+    document.getElementById("messageHolder").style.display = "none";
+    document.getElementById("cdTable").style.display = "none";
 }
 
 function showAllGroups() {
@@ -137,6 +170,8 @@ function showAllGroups() {
     document.getElementById("genreinputgroup").style.display = "inline-table";
     document.getElementById("titleinputgroup").style.display = "inline-table";
     document.getElementById("inputbutton").style.display = "inline";
+    document.getElementById("messageHolder").style.display = "none";
+    document.getElementById("cdTable").style.display = "none";
 }
 
 $(document).ready(function() {
