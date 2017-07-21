@@ -1,24 +1,57 @@
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
     <script src="scripts/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="scripts/index.js"></script>
 </head>
 <body>
-    <input id="getAllButton" type="button" value="Get All" onclick="getAllCDs()">
-    <input id="getOneButton" type="button" value="Get One" onclick="getOneCD()">
-    <input id="createButton" type="button" value="Create" onclick="createCD()">
-    <input id="deleteAllButton" type="button" value="Delete All" onclick="deleteAllCDs()">
-    <input id="deleteOneButton" type="button" value="Delete One" onclick="deleteOneCD()">
-    <input id="updateButton" type="button" value="Update" onclick="updateCD()">
-    <br>
-    <input id="idField" type = "text" placeholder="ID">
-    <input id="artistField" type = "text" placeholder="Artist Name">
-    <input id="genreField" type = "text" placeholder="Song Genre">
-    <input id="titleField" type = "text" placeholder="Song Title">
-    <br>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-default navbar-btn" onclick="getAllCDsStart()">Get All CDs</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="findCDStart()">Find a CD</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="createCDStart()">Create a New CD</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="updateCDStart()">Update a CD</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="deleteCDStart()">Delete a CD</button>
+            <button type="button" class="btn btn-default navbar-btn" onclick="deleteAllCDsStart()">Delete All CDs</button>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="col-md-3">
+            <div class="row">
+                <h1>CD API Web Application</h1>
+            </div>
+            <div class="row" id="formbox">
+                <form>
+                    <div class="input-group" id="idinputgroup">
+                        <span class="input-group-addon" id="basic-addon1">User ID</span>
+                        <input type="text" id="idField" class="form-control" placeholder="ID" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group" id="artistinputgroup">
+                        <span class="input-group-addon" id="basic-addon2">Artist Name</span>
+                        <input type="text" id="artistField" class="form-control" placeholder="Artist Name" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group" id="genreinputgroup">
+                        <span class="input-group-addon" id="basic-addon3">Song Genre</span>
+                        <input type="text" id="genreField" class="form-control" placeholder="Song Genre" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group" id="titleinputgroup">
+                        <span class="input-group-addon" id="basic-addon4">Song Title</span>
+                        <input type="text" id="titleField" class="form-control" placeholder="Song Title" aria-describedby="basic-addon4">
+                    </div>
+                    <button id="inputbutton" class="btn btn-default" type="button"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <p id = "outputHolder">
+
     </p>
 </body>
 <footer></footer>

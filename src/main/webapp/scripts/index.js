@@ -72,3 +72,73 @@ function updateCD() {
         }
     });
 }
+
+function getAllCDsStart() {
+    hideAllInputGroups();
+    getAllCDs();
+}
+
+function findCDStart() {
+    showIDInputGroup();
+    document.getElementById("inputbutton").innerText = "Find CD";
+    document.getElementById("inputbutton").onclick = getOneCD;
+}
+
+function createCDStart() {
+    showCreationGroups();
+    document.getElementById("inputbutton").innerText = "Create new CD";
+    document.getElementById("inputbutton").onclick = createCD;
+}
+
+function updateCDStart() {
+    showAllGroups();
+    document.getElementById("inputbutton").innerText = "Update CD";
+    document.getElementById("inputbutton").onclick = updateCD;
+}
+
+function deleteCDStart() {
+    showIDInputGroup();
+    document.getElementById("inputbutton").innerText = "Delete CD";
+    document.getElementById("inputbutton").onclick = deleteOneCD;
+}
+
+function deleteAllCDsStart() {
+    hideAllInputGroups();
+    deleteAllCDs();
+}
+
+function hideAllInputGroups() {
+    document.getElementById("idinputgroup").style.display = "none";
+    document.getElementById("artistinputgroup").style.display = "none";
+    document.getElementById("genreinputgroup").style.display = "none";
+    document.getElementById("titleinputgroup").style.display = "none";
+    document.getElementById("inputbutton").style.display = "none";
+}
+
+function showIDInputGroup() {
+    document.getElementById("idinputgroup").style.display = "inline-table";
+    document.getElementById("artistinputgroup").style.display = "none";
+    document.getElementById("genreinputgroup").style.display = "none";
+    document.getElementById("titleinputgroup").style.display = "none";
+    document.getElementById("inputbutton").style.display = "inline";
+}
+
+function showCreationGroups() {
+    document.getElementById("idinputgroup").style.display = "none";
+    document.getElementById("artistinputgroup").style.display = "inline-table";
+    document.getElementById("genreinputgroup").style.display = "inline-table";
+    document.getElementById("titleinputgroup").style.display = "inline-table";
+    document.getElementById("inputbutton").style.display = "inline";
+}
+
+function showAllGroups() {
+    document.getElementById("idinputgroup").style.display = "inline-table";
+    document.getElementById("artistinputgroup").style.display = "inline-table";
+    document.getElementById("genreinputgroup").style.display = "inline-table";
+    document.getElementById("titleinputgroup").style.display = "inline-table";
+    document.getElementById("inputbutton").style.display = "inline";
+}
+
+$(document).ready(function() {
+    hideAllInputGroups();
+});
