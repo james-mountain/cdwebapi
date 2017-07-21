@@ -46,7 +46,7 @@ function createCD() {
 
     $.ajax({
         type: 'POST',
-        url: ("rest/cd/json/" + document.getElementById("idField").value),
+        url: "rest/cd/json/",
         data: JSON.stringify(newCD),
         dataType: "json",
         success: function(result) {
